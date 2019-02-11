@@ -1,41 +1,20 @@
 import React, { Component } from 'react';
-
-import {
-  Card,
-  Header,
-  Container,
-} from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 import ShowItem from './ShowItem';
 
 class ShowList extends Component {
 
-
   render() {
-    var shows = this.props.shows;
+    const shows = this.props.shows;
 
-    const listItems = shows.map((show) =>
-
-      <Card key={show.title} fluid>
-        <Card.Content>
-          <Card.Header textAlign='left'>{show.title}</Card.Header>
-        </Card.Content>
-      </Card>
+    const cards = shows.map((show, index) =>
+      <ShowItem show={show} key={index} />
     );
 
     return (
-      <div>
-        <Header as="h1" textAlign="center">
-          LiVid
-        </Header>
-
-        <Container>        
-        <Card.Group itemsPerRow='3' >
-         {listItems.map((show) => show)}
-        </Card.Group>
-        </Container>
-
-
-      </div>
+      <Card.Group itemsPerRow='2' >
+        {cards.map((show) => show)}
+      </Card.Group>
     )
   }
 }

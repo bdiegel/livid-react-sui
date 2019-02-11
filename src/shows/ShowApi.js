@@ -120,6 +120,3 @@ const data =
     export function getShowData() {
         return data;
     }
-
-    // export { getShowData };
-
