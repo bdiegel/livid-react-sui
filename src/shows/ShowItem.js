@@ -7,6 +7,10 @@ import {
     List
 } from 'semantic-ui-react';
 
+import { css } from 'aphrodite';
+import { styles } from './styles';
+
+
 const ShowDescription = props => {
     const episodes = props.episodes;
     const description = episodes.slice(0, 3).map( (episode, index) => {
@@ -60,7 +64,8 @@ class ShowItem extends Component {
                         <Label color='blue'>new</Label>
                     }
 
-                    <span className='date' style={{float: 'right', position: 'relative', top: '50%', transform: 'translateY(50%)'}}>{dateMostRecent}</span>
+                    {/* <span className='date' style={{float: 'right', position: 'relative', top: '50%', transform: 'translateY(50%)'}}>{dateMostRecent}</span> */}
+                    <span className={css(styles.alignDate) + ' date'} >{dateMostRecent}</span>
 
                 </Card.Content>
             </Card>
