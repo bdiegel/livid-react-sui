@@ -118,5 +118,7 @@ const data =
     ];
 
     export function getShowData() {
+        console.log(data);
         return data;
     }
+
