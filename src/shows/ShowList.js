@@ -7,7 +7,7 @@ class ShowList extends Component {
   render() {
     const shows = this.props.shows;
 
-    const cards = shows.map((show, index) =>
+    const cards = shows.map((show, index) => 
       <ShowItem show={show} key={index} />
     );
 
