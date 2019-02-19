@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import ShowList from './shows/ShowList';
-import { getShowData } from './shows/ShowApi';
+// import { getShowData } from './sdk/Data';
+import API from './sdk/LividApi';
 import {
   Header, Container,
 } from 'semantic-ui-react';
@@ -13,32 +14,42 @@ class App extends Component {
     super(props);
     this.state = {
       error: null,
-      isLoaded: false,
+      isLoading: false,
       shows: []
     }
   }
 
+  loadData() {
+      this.setState({ isLoading: true });
+      API.getShows()
+        .then(shows => this.setState({ 
+          shows: shows, 
+          isLoading: false,
+          error: null
+        }))
+        .catch(error => this.setState({ 
+          error: 'failed to load data', 
+          isLoading: false 
+        }));
+  }
+
+
   componentDidMount() {
-    const url = 'https://api.myjson.com/bins/9x57s';
-    fetch(url)
-    .then(res => res.json())
-    .then(json => {
-        this.setState({
-          isLoaded: true,
-          shows: json
-        });
-    })
+    this.loadData();
   }
 
   render() {
     // load static data:
     //const shows = getShowData();
 
-    const { shows, isLoaded } = this.state;
+    const { shows, isLoading, error } = this.state;
 
     // TODO: should handle error case
-    if (!isLoaded) {
+    if (isLoading) {
       return <div>Loading...</div>
+    }
+    else if (error != null) {
+      return <div>{this.state.error}</div>
     }
     else {
       return (
